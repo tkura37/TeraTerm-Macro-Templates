@@ -1,0 +1,33 @@
+; シリアル接続マクロ
+
+; 定数宣言
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+COM_PORT        = 'ポート番号'
+BAUDRATE        = 'ボーレート'
+ROOTPASSWORD    = '"root権限のパスワード"'
+
+; メイン処理
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+call SerialConnect
+call ChangeToRoot
+end
+
+; サブルーチン
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; シリアル接続
+:SerialConnect
+    MSG = '/C='
+    strconcat MSG COM_PORT
+    strconcat MSG ' /BAUD='
+    strconcat MSG BAUDRATE
+    connect MSG
+return
+
+; root権限に変更
+:ChangeToRoot
+    sendln ''
+    sendln 'su -'
+    wait 'Password:'
+    sendln ROOTPASSWORD
+return

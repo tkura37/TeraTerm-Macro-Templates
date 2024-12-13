@@ -1,0 +1,21 @@
+; SSH接続マクロ(パスワード認証)
+
+; 定数宣言
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SSHHOST         = 'IPアドレスまたはホスト名'
+PORTNUM         = 'ポート番号'
+USERNAME        = 'ユーザ名'
+SSHPASSWORD     = '"パスワード"'
+
+; メイン処理
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; SSH接続
+MSG = SSHHOST
+strconcat MSG ':'
+strconcat MSG PORTNUM
+strconcat MSG ' /ssh /2 /auth=password /user='
+strconcat MSG USERNAME
+strconcat MSG ' /passwd='
+strconcat MSG SSHPASSWORD
+connect MSG

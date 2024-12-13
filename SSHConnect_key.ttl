@@ -1,0 +1,24 @@
+; SSH接続マクロ(公開鍵認証)
+
+; 定数宣言
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SSHHOST         = 'IPアドレスまたはホスト名'
+PORTNUM         = 'ポート番号'
+USERNAME        = 'ユーザ名'
+SSHPASSWORD     = '"パスワード"'
+KEYFILE         = '"公開鍵ファイルのパス"'
+
+; メイン処理
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; SSH接続
+MSG = SSHHOST
+strconcat MSG ':'
+strconcat MSG PORTNUM
+strconcat MSG ' /ssh /2 /auth=publickey /user='
+strconcat MSG USERNAME
+strconcat MSG ' /passwd='
+strconcat MSG SSHPASSWORD
+strconcat MSG ' /keyfile='
+strconcat MSG KEYFILE
+connect MSG
